@@ -1,15 +1,16 @@
-package domain
+package log
 
-type LogLevel int
+type Level int
 
 const (
-	Debug LogLevel = iota
+	Debug Level = iota
 	Info
 	Warn
 	Error
 )
 
-func (level LogLevel) String() string {
+// String returns the string representation of the log level.
+func (level Level) String() string {
 	switch level {
 	case Debug:
 		return "DEBUG"
