@@ -14,7 +14,7 @@ jobs:
       - name: Set up Go
         uses: actions/setup-go@v4
         with:
-          go-version: '1.21'
+          go-version: '1.22'
 
 #      - name: Cache Go modules
 #        uses: actions/cache@v3
@@ -27,7 +27,7 @@ jobs:
 
       - name: Install golint
         run: |
-          go get -u golang.org/x/lint/golint@e5bdbd5dfd09
+          go get -u golang.org/x/lint/golint@latest
 
       - name: Run go vet
         run: go vet $(go list ./...)
