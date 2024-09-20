@@ -5,6 +5,7 @@ import (
 	log "plentylog/internal/domain"
 )
 
+// ConsoleDriver represents a console driver.
 type ConsoleDriver struct{}
 
 // WriteLog writes a log record to the console.

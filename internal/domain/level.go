@@ -1,11 +1,16 @@
 package log
 
+// Level represents the log level.
 type Level int
 
 const (
+	// Debug level.
 	Debug Level = iota
+	// Info level.
 	Info
+	// Warn level.
 	Warn
+	// Error level.
 	Error
 )
 

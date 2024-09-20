@@ -13,6 +13,7 @@ type Record struct {
 	TransactionID string            `json:"transaction_id,omitempty"`
 }
 
+// NewRecord creates a new log record.
 func NewRecord(level Level, message string, metaData map[string]string, transactionID string) *Record {
 	return &Record{
 		Timestamp:     time.Now(),
