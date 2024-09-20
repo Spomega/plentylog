@@ -27,7 +27,7 @@ jobs:
 
       - name: Install golint
         run: |
-          go get -u golang.org/x/lint/golint@latest
+          go get -u golang.org/x/lint/golint@e5bdbd5dfd09
 
       - name: Run go vet
         run: go vet $(go list ./...)
