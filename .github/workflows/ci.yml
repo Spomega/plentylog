@@ -19,6 +19,7 @@ jobs:
       - name: Install golint
         run: |
           go get -u golang.org/x/lint/golint@latest
+          echo "$HOME/go/bin" >> $GITHUB_PATH
 
       - name: Run go vet
         run: go vet $(go list ./...)
