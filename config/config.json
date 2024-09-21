@@ -6,11 +6,11 @@
       "type": "cli"
     },
     {
-      "type": "json_file",
+      "type": "jsonFile",
       "filename": "logs.json"
     },
     {
-      "type": "log_file",
+      "type": "logFile",
       "filename": "logs.log"
     }
   ]

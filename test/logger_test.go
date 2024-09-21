@@ -2,6 +2,7 @@ package test
 
 import (
 	log "plentylog/internal/domain"
+	"reflect"
 	"testing"
 )
 
@@ -19,7 +20,13 @@ func TestLogger_Log(t *testing.T) {
 	mockDriver := &MockDriver{}
 	logger.AddDriver(mockDriver)
 
-	logger.Log(log.Info, "test Log message", nil, "")
+	txnAttributes := map[string]string{
+		"customerId": "123",
+		"operation":  "purchase",
+		"itemId":     "456",
+	}
+
+	logger.Log(log.Info, "test Log message", txnAttributes, "")
 
 	if len(mockDriver.receivedLogs) != 1 {
 		t.Errorf("Expected 1 log, got %d", len(mockDriver.receivedLogs))
@@ -33,5 +40,15 @@ func TestLogger_Log(t *testing.T) {
 
 	if receivedLog.Level != log.Info {
 		t.Errorf("Expected log level Info, got %d", receivedLog.Level)
+	}
+
+	expectedAttributes := map[string]string{
+		"customerId": "123",
+		"operation":  "purchase",
+		"itemId":     "456",
+	}
+
+	if !reflect.DeepEqual(receivedLog.MetaData, expectedAttributes) {
+		t.Errorf("Expected attributes %v, got %v", expectedAttributes, receivedLog.MetaData)
 	}
 }

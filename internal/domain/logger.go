@@ -30,10 +30,6 @@ func (l *Logger) AddDriver(driver Driver) {
 	l.drivers = append(l.drivers, driver)
 }
 
-//func NewLogger(drivers ...Driver) *Logger {
-//	return &Logger{drivers: drivers}
-//}
-
 // Log sends logs to all drivers.
 func (l *Logger) Log(level Level, message string, tags map[string]string, transactionID string) {
 	record := NewRecord(level, message, tags, transactionID)
