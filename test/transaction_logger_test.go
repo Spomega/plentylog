@@ -5,21 +5,16 @@ import (
 	"testing"
 )
 
-type MockDriver struct {
-	receivedLogs []log.Record
-}
-
-func (m *MockDriver) WriteLog(record *log.Record) error {
-	m.receivedLogs = append(m.receivedLogs, *record)
-	return nil
-}
-
-func TestLogger_Log(t *testing.T) {
+func TestTransactionLogger_log(t *testing.T) {
+	t.Parallel()
 	logger := log.NewLogger()
 	mockDriver := &MockDriver{}
 	logger.AddDriver(mockDriver)
 
-	logger.Log(log.Info, "test message", nil, "")
+	transactionID := "txn123"
+	transactionLogger := log.NewTransactionLogger(logger, transactionID)
+	attributes := map[string]string{"key": "value"}
+	transactionLogger.Log(log.Info, "test message", attributes)
 
 	if len(mockDriver.receivedLogs) != 1 {
 		t.Errorf("Expected 1 log, got %d", len(mockDriver.receivedLogs))
@@ -33,5 +28,12 @@ func TestLogger_Log(t *testing.T) {
 
 	if receivedLog.Level != log.Info {
 		t.Errorf("Expected log level Info, got %d", receivedLog.Level)
+	}
+
+	if receivedLog.TransactionID != "txn123" {
+		t.Errorf("Expected transaction ID '%s', got '%s'", transactionID, receivedLog.TransactionID)
+	}
+	if receivedLog.MetaData["key"] != "value" {
+		t.Errorf("Expected tag 'key' to be 'value', got '%s'", receivedLog.MetaData["key"])
 	}
 }
