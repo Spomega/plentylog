@@ -3,9 +3,9 @@ package config
 import (
 	"encoding/json"
 	"fmt"
+	log "github.com/Spomega/plentylog/internal/domain"
+	"github.com/Spomega/plentylog/internal/infrastructure"
 	"os"
-	log "plentylog/internal/domain"
-	"plentylog/internal/infrastructure"
 )
 
 // Config represents the configuration for the logger.
