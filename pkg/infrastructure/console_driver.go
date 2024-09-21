@@ -2,7 +2,7 @@ package infrastructure
 
 import (
 	"fmt"
-	log "github.com/Spomega/plentylog/internal/domain"
+	log "github.com/Spomega/plentylog/pkg/domain"
 )
 
 // ConsoleDriver represents a console driver.

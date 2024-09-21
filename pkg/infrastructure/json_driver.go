@@ -2,7 +2,7 @@ package infrastructure
 
 import (
 	"encoding/json"
-	log "github.com/Spomega/plentylog/internal/domain"
+	log "github.com/Spomega/plentylog/pkg/domain"
 	"os"
 )
 

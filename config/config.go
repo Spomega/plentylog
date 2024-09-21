@@ -3,8 +3,8 @@ package config
 import (
 	"encoding/json"
 	"fmt"
-	log "github.com/Spomega/plentylog/internal/domain"
-	"github.com/Spomega/plentylog/internal/infrastructure"
+	log "github.com/Spomega/plentylog/pkg/domain"
+	"github.com/Spomega/plentylog/pkg/infrastructure"
 	"os"
 )
 
