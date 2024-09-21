@@ -19,7 +19,7 @@ func TestLogger_Log(t *testing.T) {
 	mockDriver := &MockDriver{}
 	logger.AddDriver(mockDriver)
 
-	logger.Log(log.Info, "test message", nil, "")
+	logger.Log(log.Info, "test Log message", nil, "")
 
 	if len(mockDriver.receivedLogs) != 1 {
 		t.Errorf("Expected 1 log, got %d", len(mockDriver.receivedLogs))
@@ -27,7 +27,7 @@ func TestLogger_Log(t *testing.T) {
 
 	receivedLog := mockDriver.receivedLogs[0]
 
-	if receivedLog.Message != "test message" {
+	if receivedLog.Message != "test Log message" {
 		t.Errorf("Expected log message to be 'test message', got %s", mockDriver.receivedLogs[0].Message)
 	}
 

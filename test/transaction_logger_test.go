@@ -14,7 +14,7 @@ func TestTransactionLogger_log(t *testing.T) {
 	transactionID := "txn123"
 	transactionLogger := log.NewTransactionLogger(logger, transactionID)
 	attributes := map[string]string{"key": "value"}
-	transactionLogger.Log(log.Info, "test message", attributes)
+	transactionLogger.Log(log.Info, "test log message", attributes)
 
 	if len(mockDriver.receivedLogs) != 1 {
 		t.Errorf("Expected 1 log, got %d", len(mockDriver.receivedLogs))
@@ -22,7 +22,7 @@ func TestTransactionLogger_log(t *testing.T) {
 
 	receivedLog := mockDriver.receivedLogs[0]
 
-	if receivedLog.Message != "test message" {
+	if receivedLog.Message != "test log message" {
 		t.Errorf("Expected log message to be 'test message', got %s", mockDriver.receivedLogs[0].Message)
 	}
 
