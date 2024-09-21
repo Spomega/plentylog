@@ -65,7 +65,11 @@ func (c *Config) getLogger() (*log.Logger, error) {
 			}
 			logger.AddDriver(jsonDriver)
 		case "logfile":
-			//driver, err = log.NewLogFileDriver(driverConfig.FileName)
+			fileDriver, err := infrastructure.NewLogFileDriver(driverConfig.FileName)
+			if err != nil {
+				return nil, err
+			}
+			logger.AddDriver(fileDriver)
 		default:
 			return nil, fmt.Errorf("unknown driver type: %s", driverConfig.Type)
 		}
@@ -81,6 +85,14 @@ func GetDefaultLogger() (*log.Logger, error) {
 		Drivers: []DriverConfig{
 			{
 				Type: "cli",
+			},
+			{
+				Type:     "jsonFile",
+				FileName: "logs.json",
+			},
+			{
+				Type:     "logFile",
+				FileName: "logs.log",
 			},
 		},
 	}
