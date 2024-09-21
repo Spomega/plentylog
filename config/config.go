@@ -43,27 +43,6 @@ func GetLoggerWithConfig(filePath string) (*log.Logger, error) {
 		return nil, fmt.Errorf("could not create logger: %w", err)
 	}
 
-	//for _, driverConfig := range config.Drivers {
-	//
-	//	switch driverConfig.Type {
-	//	case "cli":
-	//		logger.AddDriver(&infrastructure.ConsoleDriver{})
-	//	case "json":
-	//		if driverConfig.FileName == "" {
-	//			return nil, fmt.Errorf("file driver requires a filename")
-	//		}
-	//		jsonDriver, err := infrastructure.NewJSONFileDriver(driverConfig.FileName)
-	//		if err != nil {
-	//			return nil, err
-	//		}
-	//		logger.AddDriver(jsonDriver)
-	//	case "logfile":
-	//		//driver, err = log.NewLogFileDriver(driverConfig.FileName)
-	//	default:
-	//		return nil, fmt.Errorf("unknown driver type: %s", driverConfig.Type)
-	//	}
-	//}
-
 	return logger, nil
 }
 
