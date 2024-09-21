@@ -27,6 +27,7 @@ func (c *ConsoleDriver) WriteLog(record *log.Record) error {
 		for key, value := range record.MetaData {
 			fmt.Printf("%s:%s", key, value)
 		}
+		fmt.Printf("]")
 	}
 
 	fmt.Println()

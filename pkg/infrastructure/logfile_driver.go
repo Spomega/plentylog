@@ -16,4 +16,5 @@ func NewLogFileDriver(filePath string) (*LogFileDriver, error) {
 	}
 
 	return &LogFileDriver{file: file}, nil
+
 }
