@@ -1,5 +1,10 @@
 package log
 
+import (
+	"fmt"
+	"sync"
+)
+
 // Driver represents a log driver.
 type Driver interface {
 	WriteLog(record *Record) error
@@ -8,17 +13,35 @@ type Driver interface {
 // Logger represents a logger.
 type Logger struct {
 	drivers []Driver
+	mu      sync.Mutex
 }
 
 // NewLogger creates a new logger.
-func NewLogger(drivers ...Driver) *Logger {
-	return &Logger{drivers: drivers}
+func NewLogger() *Logger {
+	return &Logger{
+		drivers: make([]Driver, 0),
+	}
 }
 
+// AddDriver adds a driver to the logger.
+func (l *Logger) AddDriver(driver Driver) {
+	l.mu.Lock()
+	defer l.mu.Unlock()
+	l.drivers = append(l.drivers, driver)
+}
+
+//func NewLogger(drivers ...Driver) *Logger {
+//	return &Logger{drivers: drivers}
+//}
+
 // Log sends logs to all drivers.
-func (logger *Logger) Log(level Level, message string, tags map[string]string, transactionID string) {
+func (l *Logger) Log(level Level, message string, tags map[string]string, transactionID string) {
 	record := NewRecord(level, message, tags, transactionID)
-	for _, driver := range logger.drivers {
-		_ = driver.WriteLog(record)
+	for _, driver := range l.drivers {
+		err := driver.WriteLog(record)
+		if err != nil {
+			fmt.Printf("Error writing log: %v ", err)
+			continue
+		}
 	}
 }

@@ -1,0 +1,17 @@
+{
+  "config_type": "default",
+  "log_level": "info",
+  "drivers": [
+    {
+      "type": "cli"
+    },
+    {
+      "type": "json_file",
+      "filename": "logs.json"
+    },
+    {
+      "type": "log_file",
+      "filename": "logs.log"
+    }
+  ]
+}
