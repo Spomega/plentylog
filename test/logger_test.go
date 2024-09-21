@@ -6,12 +6,11 @@ import (
 )
 
 type MockDriver struct {
-	recievedLogs []log.Record
-	returnError  bool
+	receivedLogs []log.Record
 }
 
 func (m *MockDriver) WriteLog(record *log.Record) error {
-	m.recievedLogs = append(m.recievedLogs, *record)
+	m.receivedLogs = append(m.receivedLogs, *record)
 	return nil
 }
 
@@ -22,11 +21,17 @@ func TestLogger_LogSuccess(t *testing.T) {
 
 	logger.Log(log.Info, "test message", nil, "")
 
-	if len(mockDriver.recievedLogs) != 1 {
-		t.Errorf("Expected 1 log, got %d", len(mockDriver.recievedLogs))
+	if len(mockDriver.receivedLogs) != 1 {
+		t.Errorf("Expected 1 log, got %d", len(mockDriver.receivedLogs))
 	}
 
-	if mockDriver.recievedLogs[0].Message != "test message" {
-		t.Errorf("Expected log message to be 'test message', got %s", mockDriver.recievedLogs[0].Message)
+	receivedLog := mockDriver.receivedLogs[0]
+
+	if receivedLog.Message != "test message" {
+		t.Errorf("Expected log message to be 'test message', got %s", mockDriver.receivedLogs[0].Message)
+	}
+
+	if receivedLog.Level != log.Info {
+		t.Errorf("Expected log level Info, got %d", receivedLog.Level)
 	}
 }
