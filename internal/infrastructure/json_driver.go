@@ -2,8 +2,8 @@ package infrastructure
 
 import (
 	"encoding/json"
+	log "github.com/Spomega/plentylog/internal/domain"
 	"os"
-	log "plentylog/internal/domain"
 )
 
 // JSONFileDriver represents a JSON file driver.

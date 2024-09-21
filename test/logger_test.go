@@ -1,7 +1,7 @@
 package test
 
 import (
-	log "plentylog/internal/domain"
+	log "github.com/Spomega/plentylog/internal/domain"
 	"reflect"
 	"testing"
 )
