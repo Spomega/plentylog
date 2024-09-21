@@ -87,11 +87,11 @@ func GetDefaultLogger() (*log.Logger, error) {
 				Type: "cli",
 			},
 			{
-				Type:     "jsonFile",
+				Type:     "json",
 				FileName: "logs.json",
 			},
 			{
-				Type:     "logFile",
+				Type:     "logfile",
 				FileName: "logs.log",
 			},
 		},
