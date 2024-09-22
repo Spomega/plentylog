@@ -49,6 +49,8 @@ func GetLoggerWithConfig(filePath string) (*log.Logger, error) {
 // getLogger creates a new logger based on the config.
 func (c *Config) getLogger() (*log.Logger, error) {
 	logger := log.NewLogger()
+	var jsonDriver *infrastructure.JSONFileDriver
+	var fileDriver *infrastructure.LogFileDriver
 
 	for _, driverConfig := range c.Drivers {
 
@@ -74,6 +76,10 @@ func (c *Config) getLogger() (*log.Logger, error) {
 			return nil, fmt.Errorf("unknown driver type: %s", driverConfig.Type)
 		}
 	}
+
+	defer jsonDriver.Close()
+
+	defer fileDriver.Close()
 
 	return logger, nil
 }

@@ -8,7 +8,7 @@ import (
 
 // JSONFileDriver represents a JSON file driver.
 type JSONFileDriver struct {
-	File *os.File
+	file *os.File
 }
 
 // NewJSONFileDriver creates a new JSON file driver.
@@ -19,9 +19,7 @@ func NewJSONFileDriver(filePath string) (*JSONFileDriver, error) {
 		return nil, err
 	}
 
-	defer file.Close()
-
-	return &JSONFileDriver{File: file}, nil
+	return &JSONFileDriver{file: file}, nil
 }
 
 // WriteLog writes a log record to a JSON file.
@@ -31,8 +29,13 @@ func (j *JSONFileDriver) WriteLog(record *log.Record) error {
 		return err
 	}
 
-	_, err = j.File.Write(logRecordJSON)
-	_, _ = j.File.Write([]byte("\n"))
+	_, err = j.file.Write(logRecordJSON)
+	_, _ = j.file.Write([]byte("\n"))
 
 	return err
+}
+
+// Close closes the file when finished.
+func (j *JSONFileDriver) Close() error {
+	return j.file.Close()
 }
