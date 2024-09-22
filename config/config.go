@@ -49,6 +49,10 @@ func GetLoggerWithConfig(filePath string) (*log.Logger, error) {
 func (c *Config) getLogger() (*log.Logger, error) {
 	logger := log.NewLogger()
 
+	if len(c.Drivers) == 0 {
+		return nil, fmt.Errorf("no drivers provided")
+	}
+
 	for _, driverConfig := range c.Drivers {
 
 		switch driverConfig.Type {
