@@ -10,8 +10,7 @@ import (
 
 // Config represents the configuration for the logger.
 type Config struct {
-	LogLevel string
-	Drivers  []DriverConfig
+	Drivers []DriverConfig
 }
 
 // DriverConfig represents the configuration for a driver.
@@ -81,7 +80,6 @@ func (c *Config) getLogger() (*log.Logger, error) {
 // GetDefaultLogger creates a new logger with default settings.
 func GetDefaultLogger() (*log.Logger, error) {
 	config := Config{
-		LogLevel: "info",
 		Drivers: []DriverConfig{
 			{
 				Type: "cli",
