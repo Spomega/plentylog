@@ -10,10 +10,16 @@ type Driver interface {
 	WriteLog(record *Record) error
 }
 
+// Closable is the interface for drivers that need to be closed.
+type Closable interface {
+	Close() error
+}
+
 // Logger represents a logger.
 type Logger struct {
-	drivers []Driver
-	mu      sync.Mutex
+	drivers   []Driver
+	closables []Closable
+	mu        sync.Mutex
 }
 
 // NewLogger creates a new logger.
@@ -27,7 +33,12 @@ func NewLogger() *Logger {
 func (l *Logger) AddDriver(driver Driver) {
 	l.mu.Lock()
 	defer l.mu.Unlock()
+
 	l.drivers = append(l.drivers, driver)
+
+	if closable, ok := driver.(Closable); ok {
+		l.closables = append(l.closables, closable)
+	}
 }
 
 // Log sends logs to all drivers.
@@ -40,4 +51,14 @@ func (l *Logger) Log(level Level, message string, tags map[string]string, transa
 			continue
 		}
 	}
+}
+
+// CloseAll closes all file-based drivers.
+func (l *Logger) CloseAll() error {
+	for _, closable := range l.closables {
+		if err := closable.Close(); err != nil {
+			return err
+		}
+	}
+	return nil
 }
