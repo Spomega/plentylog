@@ -76,9 +76,7 @@ It can just one driver or multiple drivers.
 }
 ```
 - drivers: Specifies the drivers to use. Currently, cli , json and logfile drivers are supported.
-Example Driver Output
-CLI Driver: Outputs logs directly to the console.
-File Driver: Logs are written in JSON format to the specified file.
+
 With the config file above you can create a custom logger as shown below.
 ```go
 package main
@@ -143,7 +141,7 @@ Example CLI output will be as shown below.
 [2024-09-23T00:18:10+02:00] [INFO] [TransactionID: 123] test Log message [Attributes: customerId:123, operation:purchase, itemId:456]
 ```
 Note:
- Remember to close the logger after you are done with logging to ensure all logs are flushed to the output drivers.Especially when using the file drivers.
+ Remember to close the logger by calling logger.CloseAll() after you are done with logging to ensure all logs are flushed to the output drivers.Especially when using the file drivers.
 
 
 
