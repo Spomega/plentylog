@@ -19,10 +19,13 @@ func NewLogFileDriver(filePath string) (*LogFileDriver, error) {
 		return nil, err
 	}
 
+	defer file.Close()
+
 	return &LogFileDriver{file: file}, nil
 
 }
 
+// WriteLog writes a log record to a file.
 func (d *LogFileDriver) WriteLog(record *log.Record) error {
 	logLine := fmt.Sprintf("[%s] %s: %s", record.Timestamp.Format("2006-01-02T15:04:05Z07:00"), record.Level, record.Message)
 

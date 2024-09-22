@@ -19,6 +19,8 @@ func NewJSONFileDriver(filePath string) (*JSONFileDriver, error) {
 		return nil, err
 	}
 
+	defer file.Close()
+
 	return &JSONFileDriver{File: file}, nil
 }
 
