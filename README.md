@@ -51,7 +51,7 @@ func main() {
 ```
 Example CLI output will be as shown below.
 ```bash
-[2024-09-23T00:18:10+02:00] [INFO] test Log message [Attributes: customerId:123, operation:purchase, itemId:456]
+[2024-09-23T00:18:10+02:00] [INFO] test Log message [Attributes: customerId:123 operation:purchase itemId:456]
 ```
 
 ### Custom Logging
@@ -138,7 +138,7 @@ func main() {
 ```
 Example CLI output will be as shown below.
 ```bash
-[2024-09-23T00:18:10+02:00] [INFO] [TransactionID: 123] test Log message [Attributes: customerId:123, operation:purchase, itemId:456]
+[2024-09-23T00:18:10+02:00] [INFO] [TransactionID: 123] test Log message [Attributes: customerId:123 operation:purchase itemId:456]
 ```
 Note:
  Remember to close the logger by calling logger.CloseAll() after you are done with logging to ensure all logs are flushed to the output drivers.Especially when using the file drivers.
