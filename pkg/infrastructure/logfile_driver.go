@@ -32,9 +32,9 @@ func (l *LogFileDriver) WriteLog(record *log.Record) error {
 	}
 
 	if len(record.MetaData) > 0 {
-		logLine += " [Attributes: "
+		logLine += " [Attributes:"
 		for key, value := range record.MetaData {
-			logLine += fmt.Sprintf(" %s=%s, ", key, value)
+			logLine += fmt.Sprintf(" %s:%s,", key, value)
 		}
 		logLine += "]"
 	}
