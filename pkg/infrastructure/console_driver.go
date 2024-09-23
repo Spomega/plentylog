@@ -20,7 +20,7 @@ func (c *ConsoleDriver) WriteLog(record *log.Record) error {
 	if len(record.MetaData) > 0 {
 		fmt.Printf("[Attributes: ")
 		for key, value := range record.MetaData {
-			fmt.Printf(" %s:%s,", key, value)
+			fmt.Printf(" %s:%s", key, value)
 		}
 		fmt.Printf("]")
 	}
