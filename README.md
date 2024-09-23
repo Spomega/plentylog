@@ -143,6 +143,9 @@ Example CLI output will be as shown below.
 Note:
  Remember to close the logger by calling logger.CloseAll() after you are done with logging to ensure all logs are flushed to the output drivers.Especially when using the file drivers.
 
+## Contributing
+Please feel free to submit issues, fork the repository and send pull requests!
+
 
 
 
